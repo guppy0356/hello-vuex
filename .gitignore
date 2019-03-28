@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Nightwatch
+selenium-debug.log
+/tests/e2e/reports
