@@ -1,4 +1,7 @@
 module.exports = {
+  test_runner: {
+    type: 'mocha'
+  },
   test_settings: {
     chrome: {
       desiredCapabilities: {
