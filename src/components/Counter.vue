@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ $store.state.count }}</h1>
+    <h1>{{ count }}</h1>
     <button id="plus-btn" @click="increment">+</button>
     <button id="minus-btn" @click="decrement">-</button>
   </div>
@@ -15,6 +15,11 @@ export default {
     },
     decrement() {
       this.$store.dispatch('decrement')
+    }
+  },
+  computed: {
+    count() {
+      return this.$store.state.count
     }
   }
 }
