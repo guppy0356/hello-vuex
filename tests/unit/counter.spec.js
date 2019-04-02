@@ -1,4 +1,5 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
+import Vuex from 'vuex'
 import Counter from '@/components/Counter.vue'
 
 describe('markup', () => {
@@ -16,25 +17,32 @@ describe('markup', () => {
 })
 
 describe('dispatch actions', () => {
-  const mockStore = { dispatch: jest.fn() }
-  const wrapper = shallowMount(Counter, {
-    mocks: {
-      $store: mockStore
-    },
-    computed: {
-      count() {
-        return 0
-      }
+  const localVue = createLocalVue()
+  localVue.use(Vuex)
+
+  let actions
+  let store
+
+  beforeEach(() => {
+    actions = {
+      increment: jest.fn(),
+      decrement: jest.fn()
     }
+    store = new Vuex.Store({
+      state: {},
+      actions
+    })
   })
 
   it('dispatches "increment" when plus button is pressed', () => {
+    const wrapper = shallowMount(Counter, { store, localVue })
     wrapper.find('button#plus-btn').trigger('click')
-    expect(mockStore.dispatch).toHaveBeenCalledWith('increment')
+    expect(actions.increment).toHaveBeenCalled()
   })
 
   it('dispatches "decrement" when minus button is pressed', () => {
+    const wrapper = shallowMount(Counter, { store, localVue })
     wrapper.find('button#minus-btn').trigger('click')
-    expect(mockStore.dispatch).toHaveBeenCalledWith('decrement')
+    expect(actions.decrement).toHaveBeenCalled()
   })
 })

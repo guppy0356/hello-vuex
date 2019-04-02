@@ -7,20 +7,11 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'counter',
-  methods: {
-    increment() {
-      this.$store.dispatch('increment')
-    },
-    decrement() {
-      this.$store.dispatch('decrement')
-    }
-  },
-  computed: {
-    count() {
-      return this.$store.state.count
-    }
-  }
+  methods: mapActions(['increment', 'decrement']),
+  computed: mapState(['count'])
 }
 </script>
