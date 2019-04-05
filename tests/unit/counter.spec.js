@@ -29,7 +29,7 @@ describe('dispatch actions', () => {
       decrement: jest.fn()
     }
     store = new Vuex.Store({
-      state: {},
+      state: { count: 0 },
       actions
     })
   })
