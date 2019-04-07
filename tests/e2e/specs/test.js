@@ -24,3 +24,28 @@ describe('counter testing', () => {
     })
   })
 })
+
+describe('delimiters to counter', () => {
+  it('decrements counter', (browser) => {
+    const client = browser.url(process.env.VUE_DEV_SERVER_URL)
+
+    const waitForCountUp = (andThen) => {
+      client
+        .click("button#plus-btn")
+        .element('xpath', '//*[@id="app"]/div/h1[text()="999"]', (event) => {
+          if (event.status < 0) {
+            waitForCountUp(andThen)
+          } else {
+            andThen()
+          }
+        })
+    }
+
+    waitForCountUp(() => {
+      client
+        .click("button#plus-btn")
+        .expect.element('h1').text.to.equal('1,000')
+      browser.end()
+    })
+  })
+})
