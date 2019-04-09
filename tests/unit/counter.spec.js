@@ -12,7 +12,7 @@ describe('markup', () => {
   })
 
   it('renders the correct markup', () => {
-    expect(wrapper.html()).toContain('<h1>0</h1>')
+    expect(wrapper.html()).toContain('<h1 class="title">0</h1>')
   })
 })
 
