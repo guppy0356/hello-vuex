@@ -7,6 +7,9 @@ describe('markup', () => {
     computed: {
       count() {
         return 0
+      },
+      evenOrOdd() {
+        return 'even'
       }
     }
   })
@@ -21,6 +24,7 @@ describe('dispatch actions', () => {
   localVue.use(Vuex)
 
   let actions
+  let getters
   let store
 
   beforeEach(() => {
@@ -28,9 +32,13 @@ describe('dispatch actions', () => {
       increment: jest.fn(),
       decrement: jest.fn()
     }
+    getters = {
+      evenOrOdd: jest.fn()
+    }
     store = new Vuex.Store({
       state: { count: 0 },
-      actions
+      actions,
+      getters
     })
   })
 
